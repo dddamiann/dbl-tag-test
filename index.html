@@ -1,0 +1,21 @@
+﻿<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>Double-Tagging Test Page</title>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TESTDBL001"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-TESTDBL001');
+  </script>
+  <script>
+    gtag('config', 'G-TESTDBL001');
+  </script>
+</head>
+<body>
+  <h1>Double-tagging control page</h1>
+  <p>G-TESTDBL001 jest skonfigurowane dwa razy. Oczekiwane: 2x page_view collect dla tego samego tid.</p>
+</body>
+</html>
