@@ -5,16 +5,21 @@
   <title>Double-Tagging Test Page</title>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-TESTDBL001"></script>
   <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-TESTDBL001', { send_page_view: false });
-    gtag('event', 'page_view', { send_to: 'G-TESTDBL001' });
-    gtag('event', 'page_view', { send_to: 'G-TESTDBL001' });
+    window.dataLayerA = window.dataLayerA || [];
+    function gtagA(){dataLayerA.push(arguments);}
+    gtagA('js', new Date());
+    gtagA('config', 'G-TESTDBL001');
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TESTDBL001&l=dataLayerB"></script>
+  <script>
+    window.dataLayerB = window.dataLayerB || [];
+    function gtagB(){dataLayerB.push(arguments);}
+    gtagB('js', new Date());
+    gtagB('config', 'G-TESTDBL001');
   </script>
 </head>
 <body>
   <h1>Double-tagging control page</h1>
-  <p>G-TESTDBL001 wysyla dwa page_view natychmiast. Oczekiwane: 2x collect dla tego samego tid w oknie skanu.</p>
+  <p>G-TESTDBL001 ladowane przez dwie niezalezne instancje gtag (dataLayerA + dataLayerB). Kazda wysyla wlasny page_view collect. Oczekiwane: 2x collect tid=G-TESTDBL001 natychmiast.</p>
 </body>
 </html>
