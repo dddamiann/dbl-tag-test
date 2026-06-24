@@ -8,14 +8,13 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-TESTDBL001');
-  </script>
-  <script>
-    gtag('config', 'G-TESTDBL001');
+    gtag('config', 'G-TESTDBL001', { send_page_view: false });
+    gtag('event', 'page_view', { send_to: 'G-TESTDBL001' });
+    gtag('event', 'page_view', { send_to: 'G-TESTDBL001' });
   </script>
 </head>
 <body>
   <h1>Double-tagging control page</h1>
-  <p>G-TESTDBL001 jest skonfigurowane dwa razy. Oczekiwane: 2x page_view collect dla tego samego tid.</p>
+  <p>G-TESTDBL001 wysyla dwa page_view natychmiast. Oczekiwane: 2x collect dla tego samego tid w oknie skanu.</p>
 </body>
 </html>
