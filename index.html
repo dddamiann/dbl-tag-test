@@ -3,23 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <title>Double-Tagging Test Page</title>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TESTDBL001"></script>
-  <script>
-    window.dataLayerA = window.dataLayerA || [];
-    function gtagA(){dataLayerA.push(arguments);}
-    gtagA('js', new Date());
-    gtagA('config', 'G-TESTDBL001');
-  </script>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TESTDBL001&l=dataLayerB"></script>
-  <script>
-    window.dataLayerB = window.dataLayerB || [];
-    function gtagB(){dataLayerB.push(arguments);}
-    gtagB('js', new Date());
-    gtagB('config', 'G-TESTDBL001');
-  </script>
 </head>
 <body>
   <h1>Double-tagging control page</h1>
-  <p>G-TESTDBL001 ladowane przez dwie niezalezne instancje gtag (dataLayerA + dataLayerB). Kazda wysyla wlasny page_view collect. Oczekiwane: 2x collect tid=G-TESTDBL001 natychmiast.</p>
+  <p>Strona wysyla dwa surowe page_view collect dla tid=G-TESTDBL001 natychmiast, rownolegle, z pominieciem gtag (ktory deduplikuje). Odwzorowuje sygnal dwoch niezaleznych instancji pomiaru. Oczekiwane: 2x collect tid=G-TESTDBL001.</p>
+  <script>
+    (function () {
+      var ENDPOINT = "https://www.google-analytics.com/g/collect";
+      var TID = "G-TESTDBL001";
+      var CID = "555000111.1700000000";
+      function sendPageView(seq) {
+        var qs = "v=2&tid=" + TID +
+                 "&cid=" + CID +
+                 "&en=page_view" +
+                 "&dl=" + encodeURIComponent(location.href) +
+                 "&dt=" + encodeURIComponent(document.title) +
+                 "&seq=" + seq;
+        fetch(ENDPOINT + "?" + qs, { method: "POST", keepalive: true });
+      }
+      sendPageView(1);
+      sendPageView(2);
+    })();
+  </script>
 </body>
 </html>
